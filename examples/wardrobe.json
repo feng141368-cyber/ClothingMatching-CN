@@ -1,0 +1,168 @@
+{
+  "items": [
+    {
+      "item_id": "outerwear_black_oversized_blazer",
+      "name": "Black oversized blazer",
+      "category": "outerwear",
+      "sub_category": "blazer",
+      "color": "black",
+      "size": "s",
+      "fit": "oversized",
+      "silhouette": "structured_straight",
+      "style_tags": [
+        "soft_tailoring",
+        "minimal",
+        "workwear"
+      ],
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "occasion_tags": [
+        "weekday_office",
+        "client_meeting",
+        "date"
+      ],
+      "material": "wool_blend",
+      "owned": true,
+      "condition": "excellent"
+    },
+    {
+      "item_id": "top_ivory_knit_shell",
+      "name": "Ivory fine-knit shell top",
+      "category": "top",
+      "sub_category": "knit_shell",
+      "color": "ivory",
+      "size": "s",
+      "fit": "regular",
+      "silhouette": "clean_fitted",
+      "style_tags": [
+        "minimal",
+        "layering"
+      ],
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "occasion_tags": [
+        "weekday_office",
+        "daily_casual",
+        "date"
+      ],
+      "material": "viscose_knit",
+      "owned": true,
+      "condition": "good"
+    },
+    {
+      "item_id": "bottom_charcoal_wide_leg_trousers",
+      "name": "Charcoal high-rise wide-leg trousers",
+      "category": "bottom",
+      "sub_category": "trousers",
+      "color": "charcoal",
+      "size": "s",
+      "fit": "relaxed",
+      "silhouette": "wide_leg",
+      "style_tags": [
+        "tailored",
+        "minimal",
+        "workwear"
+      ],
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "occasion_tags": [
+        "weekday_office",
+        "client_meeting",
+        "dinner"
+      ],
+      "material": "rayon_blend",
+      "owned": true,
+      "condition": "excellent"
+    },
+    {
+      "item_id": "dress_navy_knit_midi",
+      "name": "Navy knit midi dress",
+      "category": "dress",
+      "sub_category": "midi_dress",
+      "color": "navy",
+      "size": "s",
+      "fit": "regular",
+      "silhouette": "waist_defined_midi",
+      "style_tags": [
+        "feminine",
+        "minimal",
+        "smart_casual"
+      ],
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "occasion_tags": [
+        "date",
+        "weekday_office",
+        "daily_casual"
+      ],
+      "material": "rib_knit",
+      "owned": true,
+      "condition": "good"
+    },
+    {
+      "item_id": "shoes_black_leather_loafers",
+      "name": "Black leather loafers",
+      "category": "shoes",
+      "sub_category": "loafers",
+      "color": "black",
+      "size": "eu_37",
+      "fit": "regular",
+      "silhouette": "low_profile_almond_toe",
+      "style_tags": [
+        "classic",
+        "workwear",
+        "minimal"
+      ],
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "occasion_tags": [
+        "weekday_office",
+        "client_meeting",
+        "daily_casual"
+      ],
+      "material": "leather",
+      "owned": true,
+      "condition": "excellent"
+    },
+    {
+      "item_id": "bag_black_structured_shoulder",
+      "name": "Black structured shoulder bag",
+      "category": "bag",
+      "sub_category": "shoulder_bag",
+      "color": "black",
+      "size": "medium",
+      "fit": "not_applicable",
+      "silhouette": "structured_rectangular",
+      "style_tags": [
+        "minimal",
+        "workwear"
+      ],
+      "season": [
+        "all_season"
+      ],
+      "occasion_tags": [
+        "weekday_office",
+        "client_meeting",
+        "date"
+      ],
+      "material": "faux_leather",
+      "dimensions_cm": null,
+      "capacity_l": null,
+      "owned": true,
+      "condition": "good"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "metadata": {"preference_priority": ["explicit_avoid", "explicit_preference", "occasion", "style_mode", "generic_heuristic"]},
+  "categories": ["earrings", "necklace", "ring", "bracelet", "watch"],
+  "types": {
+    "earrings": ["stud", "hoop", "drop", "geometric", "pearl", "sculptural"],
+    "necklace": ["fine_chain", "pendant", "choker", "lariat", "pearl", "layered", "long_chain"],
+    "ring": ["band", "signet", "stacking", "statement", "gemstone"],
+    "bracelet": ["chain", "bangle", "cuff", "tennis", "leather"],
+    "watch": ["minimal_metal", "leather_strap", "bracelet_watch", "sport", "statement"]
+  },
+  "scales": ["small", "medium", "statement"],
+  "metals": ["silver", "gold", "stainless_steel", "pearl", "crystal", "resin"],
+  "necklines": {
+    "crew_neck": {"necklace": "fine_chain", "earrings_priority": "normal"},
+    "v_neck": {"necklace": "pendant", "earrings_priority": "normal"},
+    "turtleneck": {"necklace": null, "earrings_priority": "high"},
+    "off_shoulder": {"necklace": "pendant", "earrings_priority": "high"},
+    "square_neck": {"necklace": "pendant", "earrings_priority": "normal"},
+    "boat_neck": {"necklace": null, "earrings_priority": "high"},
+    "shirt_collar": {"necklace": "fine_chain", "earrings_priority": "normal"},
+    "open_collar": {"necklace": "fine_chain", "earrings_priority": "normal"},
+    "unknown": {"necklace": "fine_chain", "earrings_priority": "normal"}
+  },
+  "style_modes": {
+    "serious_work": {"max_scale": "small", "count": 2},
+    "business": {"max_scale": "small", "count": 2},
+    "minimal": {"max_scale": "small", "count": 2},
+    "daily_casual": {"max_scale": "medium", "count": 2},
+    "relaxed_business": {"max_scale": "medium", "count": 3},
+    "smart_casual": {"max_scale": "medium", "count": 3},
+    "streetwear": {"max_scale": "medium", "count": 3},
+    "feminine": {"max_scale": "medium", "count": 3},
+    "classic": {"max_scale": "medium", "count": 3},
+    "maximal": {"max_scale": "statement", "count": 4}
+  },
+  "complexity": {
+    "low": {"max_scale": "statement"},
+    "medium": {"max_scale": "medium"},
+    "high": {"max_scale": "small"},
+    "unknown": {"max_scale": "statement"}
+  },
+  "occasions": {
+    "client_meeting": {"max_scale": "small"},
+    "interview": {"max_scale": "small"},
+    "formal_meeting": {"max_scale": "small"},
+    "weekday_office": {"max_scale": "small"},
+    "daily_casual": {"max_scale": "medium"},
+    "date": {"max_scale": "medium"},
+    "dinner": {"max_scale": "medium"},
+    "party": {"max_scale": "statement"}
+  }
+}

@@ -1,0 +1,3 @@
+# WardrobeIQ Skill — Issue 1 foundation
+# Python 3.11+ standard library only.
+# No third-party packages are required.

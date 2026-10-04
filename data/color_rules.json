@@ -1,0 +1,175 @@
+{
+  "metadata": {
+    "description": "WardrobeIQ MVP colour attributes and relationships are descriptive heuristics, not scientific colourimetry or styling recommendations.",
+    "neutral_convention": "black, white, ivory, cream, beige, camel, brown, gray, charcoal, navy, silver, and gold are treated as neutral-capable palette colours. Navy and brown are project conventions.",
+    "contrast": "Brightness differences of zero, one, and two are classified as low, medium, and high contrast respectively."
+  },
+  "aliases": {
+    "grey": "gray",
+    "dark_grey": "charcoal",
+    "dark_gray": "charcoal",
+    "off_white": "ivory",
+    "light_blue": "light_blue"
+  },
+  "colors": {
+    "black": {
+      "family": "neutral",
+      "temperature": "neutral",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "white": {
+      "family": "neutral",
+      "temperature": "neutral",
+      "brightness": "light",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "ivory": {
+      "family": "neutral",
+      "temperature": "warm",
+      "brightness": "light",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "cream": {
+      "family": "neutral",
+      "temperature": "warm",
+      "brightness": "light",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "beige": {
+      "family": "neutral",
+      "temperature": "warm",
+      "brightness": "medium",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "camel": {
+      "family": "neutral",
+      "temperature": "warm",
+      "brightness": "medium",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "brown": {
+      "family": "neutral",
+      "temperature": "warm",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "gray": {
+      "family": "neutral",
+      "temperature": "neutral",
+      "brightness": "medium",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "charcoal": {
+      "family": "neutral",
+      "temperature": "neutral",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "navy": {
+      "family": "neutral",
+      "temperature": "cool",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "blue": {
+      "family": "blue",
+      "temperature": "cool",
+      "brightness": "medium",
+      "saturation": "medium",
+      "is_neutral": false
+    },
+    "light_blue": {
+      "family": "blue",
+      "temperature": "cool",
+      "brightness": "light",
+      "saturation": "medium",
+      "is_neutral": false
+    },
+    "green": {
+      "family": "green",
+      "temperature": "neutral",
+      "brightness": "medium",
+      "saturation": "medium",
+      "is_neutral": false
+    },
+    "olive": {
+      "family": "green",
+      "temperature": "warm",
+      "brightness": "medium",
+      "saturation": "low",
+      "is_neutral": false
+    },
+    "red": {
+      "family": "red",
+      "temperature": "warm",
+      "brightness": "medium",
+      "saturation": "high",
+      "is_neutral": false
+    },
+    "burgundy": {
+      "family": "red",
+      "temperature": "cool",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": false
+    },
+    "pink": {
+      "family": "pink",
+      "temperature": "cool",
+      "brightness": "light",
+      "saturation": "medium",
+      "is_neutral": false
+    },
+    "yellow": {
+      "family": "yellow",
+      "temperature": "warm",
+      "brightness": "light",
+      "saturation": "high",
+      "is_neutral": false
+    },
+    "purple": {
+      "family": "purple",
+      "temperature": "cool",
+      "brightness": "medium",
+      "saturation": "medium",
+      "is_neutral": false
+    },
+    "silver": {
+      "family": "metallic",
+      "temperature": "cool",
+      "brightness": "dark",
+      "saturation": "low",
+      "is_neutral": true
+    },
+    "gold": {
+      "family": "metallic",
+      "temperature": "warm",
+      "brightness": "medium",
+      "saturation": "low",
+      "is_neutral": true
+    }
+  },
+  "harmony_relationships": {
+    "analogous": [
+      ["blue", "green"],
+      ["red", "pink"],
+      ["purple", "pink"]
+    ],
+    "complementary": [
+      ["blue", "camel"],
+      ["red", "green"],
+      ["yellow", "purple"]
+    ]
+  }
+}

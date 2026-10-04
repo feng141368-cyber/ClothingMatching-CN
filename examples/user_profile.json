@@ -1,0 +1,77 @@
+{
+  "user_id": "example_user_001",
+  "body": {
+    "height_cm": 168,
+    "shoulder_width_cm": 37,
+    "bust_cm": 82,
+    "waist_cm": 64,
+    "hip_cm": 89,
+    "inseam_cm": 76,
+    "shoe_size_eu": 37
+  },
+  "fit_preferences": {
+    "tops": "regular",
+    "shirts": "relaxed",
+    "blazers": "oversized",
+    "trousers": "straight",
+    "dresses": "fitted"
+  },
+  "style_modes": [
+    "relaxed_business",
+    "minimal"
+  ],
+  "style_keywords": [
+    "modern_french_casual",
+    "soft_tailoring"
+  ],
+  "color_preferences": {
+    "preferred": [
+      "black",
+      "ivory",
+      "charcoal",
+      "navy",
+      "muted_burgundy"
+    ],
+    "avoid": [
+      "neon",
+      "large_logo_print"
+    ]
+  },
+  "accessory_preferences": {
+    "preferred_metals": [
+      "silver"
+    ],
+    "preferred_colors": [
+      "silver"
+    ],
+    "preferred_scale": [
+      "small",
+      "medium"
+    ],
+    "preferred_shapes": [
+      "geometric",
+      "hoop"
+    ],
+    "preferred_types": [
+      "earrings",
+      "necklace",
+      "ring",
+      "bracelet",
+      "watch"
+    ],
+    "avoid": []
+  },
+  "usage_contexts": [
+    "weekday_office",
+    "client_meeting",
+    "weekend_coffee_date",
+    "city_walking"
+  ],
+  "budget": {
+    "currency": "CNY",
+    "max_total": 1000
+  },
+  "notes": {
+    "bag_preference": "structured_medium_shoulder_bag"
+  }
+}

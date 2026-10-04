@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "description": "WardrobeIQ silhouette attributes are descriptive MVP conventions, not universal tailoring definitions or body-shape guidance."
+  },
+  "aliases": {
+    "wide_leg": "wide_leg",
+    "a_line": "a_line",
+    "drop_shoulder": "dropped_shoulder",
+    "dropped_shoulder": "dropped_shoulder",
+    "long_line": "longline",
+    "oversize": "oversized"
+  },
+  "silhouettes": {
+    "fitted": {"volume": "low", "shape": "fitted", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "slim": {"volume": "low", "shape": "fitted", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "straight": {"volume": "medium", "shape": "straight", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "relaxed": {"volume": "medium", "shape": "straight", "structure": "soft", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "oversized": {"volume": "high", "shape": "boxy", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "low", "rise": null},
+    "cropped": {"volume": "medium", "shape": "unknown", "structure": "medium", "length_effect": "cropped", "vertical_emphasis": "low", "rise": null},
+    "longline": {"volume": "medium", "shape": "column", "structure": "medium", "length_effect": "long", "vertical_emphasis": "high", "rise": null},
+    "wide_leg": {"volume": "high", "shape": "wide", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "tapered": {"volume": "medium", "shape": "tapered", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "a_line": {"volume": "medium", "shape": "a_line", "structure": "medium", "length_effect": "standard", "vertical_emphasis": "medium", "rise": null},
+    "column": {"volume": "medium", "shape": "column", "structure": "medium", "length_effect": "long", "vertical_emphasis": "high", "rise": null},
+    "structured": {"volume": "medium", "shape": "unknown", "structure": "structured", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": null},
+    "soft": {"volume": "medium", "shape": "fluid", "structure": "soft", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": null},
+    "fluid": {"volume": "medium", "shape": "fluid", "structure": "soft", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": null},
+    "boxy": {"volume": "high", "shape": "boxy", "structure": "structured", "length_effect": "standard", "vertical_emphasis": "low", "rise": null},
+    "dropped_shoulder": {"volume": "medium", "shape": "unknown", "structure": "medium", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": null},
+    "high_rise": {"volume": "medium", "shape": "unknown", "structure": "medium", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": "high_rise"},
+    "mid_rise": {"volume": "medium", "shape": "unknown", "structure": "medium", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": "mid_rise"},
+    "low_rise": {"volume": "medium", "shape": "unknown", "structure": "medium", "length_effect": "not_applicable", "vertical_emphasis": "medium", "rise": "low_rise"}
+  },
+  "pair_rules": {
+    "cropped|high_rise": {"length_relationship": "cropped_with_high_rise", "proportion_pattern": "cropped_high_rise"},
+    "fitted|wide_leg": {"volume_relationship": "lower_heavy", "proportion_pattern": "fitted_wide"},
+    "oversized|straight": {"volume_relationship": "mixed", "proportion_pattern": "loose_straight"},
+    "oversized|wide_leg": {"volume_relationship": "high_volume", "proportion_pattern": "volume_on_volume"},
+    "soft|structured": {"structure_relationship": "structured_soft_contrast"}
+  },
+  "mix_rules": {
+    "oversized|fitted|straight": {"volume_pattern": "mixed", "proportion_pattern": "loose_fitted_straight"}
+  }
+}

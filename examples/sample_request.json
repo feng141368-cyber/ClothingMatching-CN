@@ -1,0 +1,21 @@
+{
+  "request_id": "example_request_001",
+  "user_profile_ref": "examples/user_profile.json",
+  "wardrobe_ref": "examples/wardrobe.json",
+  "occasion": "client_meeting",
+  "goal": "polished_and_approachable_without_being_overly_formal",
+  "must_use_item_ids": [
+    "outerwear_black_oversized_blazer"
+  ],
+  "avoid_item_ids": [],
+  "requested_outfit_count": 3,
+  "constraints": {
+    "weather": "mild_spring",
+    "activity": "commute_and_seated_meeting",
+    "shopping_budget": {
+      "currency": "CNY",
+      "max_total": 1000
+    }
+  },
+  "preferred_output_language": "zh-CN"
+}

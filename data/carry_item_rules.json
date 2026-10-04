@@ -1,0 +1,9 @@
+{
+  "fit_margin_cm": 1.0,
+  "reference_items": {
+    "phone": {"width_cm": 7.0, "height_cm": 15.0, "depth_cm": 1.0, "approximate_reference": true},
+    "wallet": {"width_cm": 10.0, "height_cm": 9.0, "depth_cm": 2.0, "approximate_reference": true},
+    "power_bank": {"width_cm": 7.0, "height_cm": 14.0, "depth_cm": 2.0, "approximate_reference": true},
+    "a4_document": {"width_cm": 21.0, "height_cm": 29.7, "depth_cm": null, "approximate_reference": true}
+  }
+}

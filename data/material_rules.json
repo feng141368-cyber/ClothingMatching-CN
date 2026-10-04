@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "description": "WardrobeIQ material attributes are broad fashion heuristics, not textile-science, quality, sustainability, or comfort ratings.",
+    "taxonomy_convention": "Fibres, blends, constructions, weaves, finishes, and fashion material labels share one practical MVP vocabulary."
+  },
+  "aliases": {
+    "fake_leather": "faux_leather",
+    "faux_leather": "faux_leather",
+    "wool_blend": "wool_blend",
+    "rayon_blend": "rayon",
+    "poly": "polyester"
+  },
+  "materials": {
+    "cotton": {"family": "natural", "texture": ["soft", "matte"], "visual_weight": "light", "structure": "soft", "warmth": "low", "breathability": "high", "formality": "low", "seasonality": ["spring", "summer", "autumn"], "surface_tags": ["matte"], "texture_density": "low"},
+    "denim": {"family": "construction", "texture": ["textured", "matte"], "visual_weight": "medium", "structure": "structured", "warmth": "medium", "breathability": "medium", "formality": "low", "seasonality": ["spring", "autumn", "winter"], "surface_tags": ["matte", "textured"], "texture_density": "medium"},
+    "linen": {"family": "natural", "texture": ["textured", "matte"], "visual_weight": "light", "structure": "soft", "warmth": "low", "breathability": "high", "formality": "medium", "seasonality": ["spring", "summer"], "surface_tags": ["matte", "textured"], "texture_density": "medium"},
+    "wool": {"family": "natural", "texture": ["textured", "matte"], "visual_weight": "heavy", "structure": "structured", "warmth": "high", "breathability": "medium", "formality": "high", "seasonality": ["spring", "autumn", "winter"], "surface_tags": ["matte", "textured"], "texture_density": "medium"},
+    "wool_blend": {"family": "mixed", "texture": ["textured", "matte"], "visual_weight": "medium", "structure": "structured", "warmth": "medium", "breathability": "medium", "formality": "high", "seasonality": ["spring", "autumn", "winter"], "surface_tags": ["matte", "textured"], "texture_density": "medium"},
+    "cashmere": {"family": "natural", "texture": ["fine", "soft"], "visual_weight": "medium", "structure": "soft", "warmth": "high", "breathability": "medium", "formality": "high", "seasonality": ["autumn", "winter"], "surface_tags": ["soft", "matte"], "texture_density": "low"},
+    "knit": {"family": "construction", "texture": ["soft", "textured"], "visual_weight": "heavy", "structure": "soft", "warmth": "high", "breathability": "medium", "formality": "variable", "seasonality": ["autumn", "winter"], "surface_tags": ["textured"], "texture_density": "medium"},
+    "viscose": {"family": "semi_synthetic", "texture": ["smooth", "soft"], "visual_weight": "light", "structure": "fluid", "warmth": "low", "breathability": "medium", "formality": "medium", "seasonality": ["spring", "summer", "autumn"], "surface_tags": ["smooth"], "texture_density": "low"},
+    "rayon": {"family": "semi_synthetic", "texture": ["smooth", "soft"], "visual_weight": "light", "structure": "fluid", "warmth": "low", "breathability": "medium", "formality": "medium", "seasonality": ["spring", "summer", "autumn"], "surface_tags": ["smooth"], "texture_density": "low"},
+    "polyester": {"family": "synthetic", "texture": ["smooth"], "visual_weight": "medium", "structure": "medium", "warmth": "medium", "breathability": "low", "formality": "variable", "seasonality": ["all_season"], "surface_tags": ["smooth"], "texture_density": "low"},
+    "nylon": {"family": "synthetic", "texture": ["smooth"], "visual_weight": "light", "structure": "medium", "warmth": "low", "breathability": "low", "formality": "low", "seasonality": ["all_season"], "surface_tags": ["smooth"], "texture_density": "low"},
+    "leather": {"family": "leather", "texture": ["smooth"], "visual_weight": "heavy", "structure": "structured", "warmth": "medium", "breathability": "low", "formality": "high", "seasonality": ["spring", "autumn", "winter"], "surface_tags": ["smooth", "matte"], "texture_density": "medium"},
+    "faux_leather": {"family": "synthetic", "texture": ["smooth"], "visual_weight": "medium", "structure": "structured", "warmth": "medium", "breathability": "low", "formality": "medium", "seasonality": ["spring", "autumn", "winter"], "surface_tags": ["smooth", "matte"], "texture_density": "medium"},
+    "suede": {"family": "leather", "texture": ["napped", "soft"], "visual_weight": "medium", "structure": "soft", "warmth": "medium", "breathability": "low", "formality": "medium", "seasonality": ["autumn", "winter"], "surface_tags": ["napped", "matte"], "texture_density": "medium"},
+    "silk": {"family": "natural", "texture": ["smooth", "lustrous"], "visual_weight": "light", "structure": "fluid", "warmth": "low", "breathability": "high", "formality": "high", "seasonality": ["spring", "summer", "autumn"], "surface_tags": ["smooth", "lustrous"], "texture_density": "low"},
+    "satin": {"family": "construction", "texture": ["smooth", "lustrous"], "visual_weight": "light", "structure": "fluid", "warmth": "low", "breathability": "medium", "formality": "high", "seasonality": ["spring", "summer", "autumn"], "surface_tags": ["smooth", "lustrous"], "texture_density": "low"},
+    "velvet": {"family": "construction", "texture": ["napped", "soft"], "visual_weight": "heavy", "structure": "soft", "warmth": "high", "breathability": "low", "formality": "high", "seasonality": ["autumn", "winter"], "surface_tags": ["napped", "lustrous"], "texture_density": "high"},
+    "corduroy": {"family": "construction", "texture": ["ribbed", "textured"], "visual_weight": "heavy", "structure": "structured", "warmth": "high", "breathability": "medium", "formality": "low", "seasonality": ["autumn", "winter"], "surface_tags": ["ribbed", "matte"], "texture_density": "high"},
+    "tweed": {"family": "construction", "texture": ["coarse", "textured"], "visual_weight": "heavy", "structure": "structured", "warmth": "high", "breathability": "medium", "formality": "high", "seasonality": ["autumn", "winter"], "surface_tags": ["textured", "matte"], "texture_density": "high"},
+    "technical": {"family": "technical", "texture": ["smooth"], "visual_weight": "light", "structure": "medium", "warmth": "variable", "breathability": "variable", "formality": "low", "seasonality": ["all_season"], "surface_tags": ["smooth"], "texture_density": "low"}
+  },
+  "pair_rules": {
+    "silk|wool": {"texture_contrast": "high", "structure_relationship": "structured_fluid_contrast", "surface_relationship": "matte_lustrous_contrast"}
+  }
+}

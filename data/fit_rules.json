@@ -1,0 +1,225 @@
+{
+  "metadata": {
+    "description": "Heuristic ease thresholds for WardrobeIQ MVP fit analysis. These rules are not universal tailoring standards.",
+    "intervals": "Each range is inclusive at its lower bound and exclusive at its upper bound. A null upper bound has no limit.",
+    "shoulder_difference_labels_cm": {
+      "narrower_max": -1,
+      "close_max": 2,
+      "extended_max": 5
+    }
+  },
+  "t_shirt": {
+    "classification_strategy": "primary",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": false,
+    "measurement_rules": {
+      "bust_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 4],
+          "slim": [4, 8],
+          "regular": [8, 14],
+          "relaxed": [14, 22],
+          "oversized": [22, 32],
+          "extreme_oversized": [32, null]
+        }
+      },
+      "waist_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 7],
+          "regular": [7, 12],
+          "relaxed": [12, 20],
+          "oversized": [20, 30],
+          "extreme_oversized": [30, null]
+        }
+      }
+    }
+  },
+  "shirt": {
+    "classification_strategy": "primary",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": true,
+    "measurement_rules": {
+      "bust_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 7],
+          "regular": [7, 13],
+          "relaxed": [13, 20],
+          "oversized": [20, 30],
+          "extreme_oversized": [30, null]
+        }
+      },
+      "waist_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 6],
+          "regular": [6, 11],
+          "relaxed": [11, 18],
+          "oversized": [18, 28],
+          "extreme_oversized": [28, null]
+        }
+      }
+    }
+  },
+  "blazer": {
+    "classification_strategy": "primary",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": true,
+    "measurement_rules": {
+      "bust_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 6],
+          "regular": [6, 10],
+          "relaxed": [10, 15],
+          "oversized": [15, 25],
+          "extreme_oversized": [25, null]
+        }
+      },
+      "waist_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 6],
+          "regular": [6, 10],
+          "relaxed": [10, 15],
+          "oversized": [15, 25],
+          "extreme_oversized": [25, null]
+        }
+      }
+    }
+  },
+  "coat": {
+    "classification_strategy": "primary",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": true,
+    "measurement_rules": {
+      "bust_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 5],
+          "slim": [5, 10],
+          "regular": [10, 18],
+          "relaxed": [18, 28],
+          "oversized": [28, 42],
+          "extreme_oversized": [42, null]
+        }
+      },
+      "hip_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 4],
+          "slim": [4, 9],
+          "regular": [9, 16],
+          "relaxed": [16, 26],
+          "oversized": [26, 40],
+          "extreme_oversized": [40, null]
+        }
+      }
+    }
+  },
+  "dress": {
+    "classification_strategy": "dress",
+    "minimum_measurements_for_classification": 2,
+    "shoulder_analysis": false,
+    "measurement_rules": {
+      "bust_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 3],
+          "slim": [3, 6],
+          "regular": [6, 12],
+          "relaxed": [12, 20],
+          "oversized": [20, 30],
+          "extreme_oversized": [30, null]
+        }
+      },
+      "waist_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 5],
+          "regular": [5, 9],
+          "relaxed": [9, 16],
+          "oversized": [16, 25],
+          "extreme_oversized": [25, null]
+        }
+      },
+      "hip_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 5],
+          "regular": [5, 10],
+          "relaxed": [10, 18],
+          "oversized": [18, 28],
+          "extreme_oversized": [28, null]
+        }
+      }
+    }
+  },
+  "trousers": {
+    "classification_strategy": "bottom",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": false,
+    "measurement_rules": {
+      "waist_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 4],
+          "regular": [4, 7],
+          "relaxed": [7, 12],
+          "oversized": [12, 20],
+          "extreme_oversized": [20, null]
+        }
+      },
+      "hip_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 5],
+          "regular": [5, 9],
+          "relaxed": [9, 15],
+          "oversized": [15, 25],
+          "extreme_oversized": [25, null]
+        }
+      }
+    }
+  },
+  "skirt": {
+    "classification_strategy": "bottom",
+    "minimum_measurements_for_classification": 1,
+    "shoulder_analysis": false,
+    "measurement_rules": {
+      "waist_cm": {
+        "role": "primary",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 4],
+          "regular": [4, 7],
+          "relaxed": [7, 12],
+          "oversized": [12, 20],
+          "extreme_oversized": [20, null]
+        }
+      },
+      "hip_cm": {
+        "role": "supporting",
+        "ease_thresholds_cm": {
+          "fitted": [0, 2],
+          "slim": [2, 5],
+          "regular": [5, 9],
+          "relaxed": [9, 15],
+          "oversized": [15, 25],
+          "extreme_oversized": [25, null]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "ranking_weights": {"style_preference_alignment": 0.2, "occasion_alignment": 0.2, "wardrobe_coverage": 0.2, "color_coherence": 0.15, "silhouette_alignment": 0.1, "material_coherence": 0.1, "fit_preference_alignment": 0.05},
+  "occasions": {"client_meeting": {"formality": "high", "style_modes": ["relaxed_business", "minimal", "serious_work"]}, "weekday_office": {"formality": "medium", "style_modes": ["relaxed_business", "minimal", "business"]}, "daily_casual": {"formality": "low", "style_modes": ["daily_casual", "minimal", "streetwear"]}, "date": {"formality": "medium", "style_modes": ["feminine", "smart_casual", "minimal"]}},
+  "templates": [{"name": "separates", "slots": ["outerwear", "top", "bottom", "shoes", "bag"]}, {"name": "dress", "slots": ["outerwear", "dress_or_one_piece", "shoes", "bag"]}]
+}
