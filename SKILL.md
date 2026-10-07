@@ -1,10 +1,10 @@
 ## Name
 
-WardrobeIQ Skill — 智能穿搭、尺码与购物决策 Skill
+ClothingMatching-CN Skill — 智能穿搭、尺码与购物决策 Skill
 
 ## Purpose
 
-Provide explainable fashion decision support for body-aware styling, size guidance, wardrobe matching, and shopping recommendations. This is an AI-agent-callable skill, not a website or application. Default all user-facing prose to Chinese unless the user requests another language; retain English JSON and code keys.
+提供离线优先、可解释、以衣橱为中心的穿搭与服装决策支持，包括已知尺寸分析、衣橱匹配和购物规格。This is an AI-agent-callable skill, not a website or application. Default all user-facing prose to Chinese unless the user requests another language; retain English JSON and code keys.
 
 ## When to Use
 
@@ -45,13 +45,13 @@ The skill must work when this is the only input. Treat all unstated information 
 2. Separate three independent decisions: **body fit** (known body measurements and comfort), **garment fit** (cut, measurements, intended ease, and size chart), and **style intent** (occasion, silhouette, colours, and aesthetic). Do not use one as a substitute for another.
 3. For outfit-generation requests, determine the applicable style modes. Support `serious_work`, `daily_casual`, `minimal`, and `maximal`; also support `business`, `relaxed_business`, `smart_casual`, `streetwear`, `feminine`, and `classic`.
 4. Apply Wardrobe First in this strict order when wardrobe data is available: existing wardrobe -> substitutions -> missing item -> shopping specification -> product search. When no wardrobe is supplied, state that ownership is unknown and do not claim an item is owned.
-5. Build and rank at least three complete, occasion-appropriate outfit plans by default. Rank them according to the user's supplied style preferences when available. Do not introduce an irrelevant date, social, or other occasion direction.
+5. Build and rank complete, occasion-appropriate outfit plans from real wardrobe combinations. `requested_outfit_count` is a desired count: return only genuinely unique major-item combinations, warn when fewer are available, and never duplicate a plan by changing only a style label, rank, or accessories.
 6. If no style preference exists, use reasonable directions that fit the request; `serious_work`, `daily_casual`, and `minimal` are suitable defaults when relevant, with `maximal` available as an additional direction.
 7. If an item is genuinely missing, define a shopping specification with category, target fit and silhouette, preferred colours/materials, required features, compatibility with known items, budget, brand preferences, and shopping region. Search products only after this specification exists. For real results, accept only verified official brand product pages; reject marketplace, reseller, aggregator, missing-provenance, and domain-mismatched candidates. Do not convert currencies; state a currency mismatch instead.
 8. For size advice, compare stated body data with the brand or garment size chart, identify the intended garment fit, and explain uncertainty. Do not give a definitive size when reliable dimensions are unavailable.
 9. For bag capacity, use the Bag Capacity Engine to compare stated dimensions or capacity with each stated carry item. Require known dimensions where exact fit matters; report unknown rather than guessing. Treat every item-fit result as independent, not proof of simultaneous packing.
 10. Return concise Chinese recommendations, rationale, assumptions, alternatives, and any information that would materially improve confidence.
-11. For a requested visual render, pass the existing outfit plan to the Look Renderer. Hairstyle and headwear may be supplied as visual preferences; otherwise use bounded rendering defaults. They are rendering cues only, never grooming or outfit recommendations.
+11. For a requested visual render, pass the existing outfit plan to the offline Look Renderer. It returns a text-based rendering specification or prompt only; actual AI image generation is not implemented. Hairstyle and headwear may be supplied as visual preferences; otherwise use bounded rendering defaults. They are rendering cues only, never grooming or outfit recommendations.
 
 ## Recommendation Rules
 
@@ -70,7 +70,7 @@ The skill must work when this is the only input. Treat all unstated information 
 Respond in Chinese by default with these elements, omitting only those that are irrelevant:
 
 1. `推荐结论`: the ranked recommendation summary.
-2. `搭配方案`: for an outfit-generation request, at least three complete, ranked outfit plans by default. Each plan may include `outerwear`, `top`, `bottom`, `dress_or_one_piece`, `shoes`, `bag`, `earrings`, `necklace`, `ring`, `bracelet`, and `watch`. Set irrelevant accessories or clothing slots to `None`; do not force every slot to be populated.
+2. `搭配方案`: for an outfit-generation request, return up to the requested count of complete, ranked, genuinely unique plans. Each plan may include `outerwear`, `top`, `bottom`, `dress_or_one_piece`, `shoes`, `bag`, `earrings`, `necklace`, `ring`, `bracelet`, and `watch`. Set irrelevant accessories or clothing slots to `None`; do not force every slot to be populated.
 3. `理由`: occasion, style mode, proportion, colour, practicality, and known wardrobe-compatibility rationale for each plan.
 4. `尺码/容量判断`: only when relevant; distinguish evidence from uncertainty.
 5. `缺失单品与购物规格`: only if the known wardrobe cannot meet the need; provide a specification before any product search.
@@ -80,7 +80,7 @@ Use English keys when a JSON response is requested. Include `outfit_plans`, `ass
 
 ## Fallback Behaviour
 
-When only a natural-language request or incomplete data is available, still provide at least three general but complete outfit plans in Chinese that fit the user's stated occasion and goal. Flag each assumption, do not invent body, profile, wardrobe, garment, capacity, or product data, and avoid definitive fit, size, capacity, or product claims. Do not force a date or social look for a work, interview, or other unrelated occasion. State which optional details would improve the result, such as body measurements, garment size chart, wardrobe inventory, target occasion, weather, preferred fit, style modes, colour preferences, carry-item dimensions, and budget.
+When only a natural-language request or incomplete data is available, provide general but complete outfit directions in Chinese that fit the stated occasion and goal, while clearly distinguishing them from verified owned-item combinations. Flag each assumption, do not invent body, profile, wardrobe, garment, capacity, or product data, and avoid definitive fit, size, capacity, or product claims. Do not force a date or social look for a work, interview, or other unrelated occasion. State which optional details would improve the result, such as body measurements, garment size chart, wardrobe inventory, target occasion, weather, preferred fit, style modes, colour preferences, carry-item dimensions, and budget.
 
 ## Examples
 
@@ -90,4 +90,4 @@ Use the sample files as a linked input set:
 - `examples/wardrobe.json`: optional wardrobe schema with an owned black oversized blazer and unknown bag-capacity fields represented as `null`.
 - `examples/sample_request.json`: a wardrobe-first `client_meeting` request using `must_use_item_ids` and `avoid_item_ids`.
 
-For the sample request, begin with `outerwear_black_oversized_blazer`, compose at least three `relaxed_business` or `minimal` client-meeting plans from compatible known items, explain the result in Chinese, and define a missing-item specification only if the available wardrobe cannot achieve the stated goal.
+For the sample request, begin with `outerwear_black_oversized_blazer`, compose and rank the actual unique `relaxed_business` or `minimal` client-meeting plans from compatible known items, warn if the requested count cannot be met without duplication, and define a missing-item specification only if the available wardrobe cannot achieve the stated goal.

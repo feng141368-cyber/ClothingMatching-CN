@@ -1,4 +1,4 @@
-"""Tests for WardrobeIQ's data-driven silhouette analysis."""
+"""Tests for ClothingMatching-CN Skill's data-driven silhouette analysis."""
 
 from __future__ import annotations
 

@@ -1,294 +1,120 @@
-# WardrobeIQ Skill
+# ClothingMatching-CN Skill
 
-> **智能穿搭、尺码与购物决策 Skill**
-> An explainable fashion decision-support skill for body-aware styling, size guidance, wardrobe matching and shopping recommendations.
+**ClothingMatching-CN Skill** 是一个离线优先、可解释、以衣橱为中心的穿搭与服装决策 Skill。它面向需要从结构化衣橱、用户偏好和明确约束中获得实用搭配方案的用户；不是 Web 应用，也不是训练得到的机器学习模型。
 
-WardrobeIQ Skill is an AI-agent-callable skill that turns a natural-language fashion request, plus any available profile, wardrobe, and product context, into transparent styling guidance. It is a **skill foundation**, not a website or application: there is no web UI, account system, database, or trained model in this repository.
+## Key Features
 
-## What it does
+- **User Profile Resolver**：将结构化或部分结构化资料规范为可预测的用户档案。
+- **Fit Analysis**：基于已知身体与服装尺寸，解释不同品类的宽松量与不确定性。
+- **Colour Compatibility**：分析已知颜色的关系、对比度和中性色构成。
+- **Material Compatibility**：描述已知材质的纹理、结构和季节重合度。
+- **Silhouette Analysis**：描述已知廓形组合，不进行身形判断。
+- **Accessories Matching**：按服装上下文与显式偏好生成配饰规格。
+- **Wardrobe Matching**：优先使用已有衣物，并区分精确匹配、可替代匹配和缺失项。
+- **Constraint-aware Outfit Generation**：按真实衣物组合生成「上衣＋下装」或「连衣裙」方案，严格处理 `must_use_item_ids` 与 `avoid_item_ids`。
+- **Explainable Ranking**：按实际组合独立计算风格、场合、颜色、衣橱覆盖和版型偏好信号。
+- **Shopping Specification and Official-source Validation**：为真实缺失项生成购物规格，并验证官方来源数据契约；不执行实时商品搜索。
+- **Bag Capacity and Carry-fit Estimation**：根据已知尺寸估算容量并独立判断携带物品是否可放入。
+- **Optional Text-based Look Renderer**：将已有搭配方案转换为离线 fashion sketch / fashion board 文本规格与提示词，不生成图片。
 
-The foundation defines a reusable instruction contract for an AI agent to:
+## How It Works
 
-- Produce at least three complete, ranked outfit plans by default for outfit-generation requests.
-- Support `serious_work`, `daily_casual`, `minimal`, `maximal`, `business`, `relaxed_business`, `smart_casual`, `streetwear`, `feminine`, and `classic` style modes.
-- Assess whether a specific product suits known fit, style, practical, and budget goals.
-- Give size guidance from supplied body measurements and a garment's size chart.
-- Match known clothing before suggesting a purchase.
-- Recommend accessories and assess bag capacity for a laptop, water bottle, or umbrella when dimensions are available.
-- Specify a missing item before any future product search.
-
-Only a natural-language `request` is required. Profile, wardrobe, product, size-chart, weather, and budget data are optional context; the skill records unknowns rather than inventing them. User-facing recommendations default to Chinese while JSON keys remain English for predictable agent and tool integration.
-
-## Why I built it
-
-Fashion advice is often opaque, product-first, and disconnected from clothes people already own. WardrobeIQ starts with the wardrobe when it is available and makes each recommendation traceable: it separates body fit, garment fit, and style intent; explains substitutions; and turns a genuine gap into a constrained shopping brief rather than an arbitrary product link.
-
-This is **not a trained fashion AI model**. It is deliberately a rule-based, constraint-aware, explainable ranking system. The Issue 1 scope establishes the instruction, sample data, and future-facing contract; it does not claim that automated scoring, product retrieval, image understanding, size-chart extraction, or matching engines are implemented.
-
-## Implemented foundations
-
-- Profile Resolver ✅
-- Fit Engine ✅
-- Colour Engine ✅
-- Material Engine ✅
-- Silhouette Engine ✅
-- Accessories Matcher ✅
-- Wardrobe Matcher ✅
-- Outfit Matcher ✅
-- Shopping Resolver ✅
-- Bag Capacity Engine ✅
-- Look Renderer ✅
-- OpenAI Image Provider ✅
-
-## Shopping Resolver
-
-Shopping specifications are built only from established `missing_recommendation` gaps. The production provider contract defaults to `official_sources_only: true`: a real candidate must declare `source_type: "brand_official"`, a verified official domain, and a product URL whose host exactly matches that domain. Marketplace, reseller, aggregator, missing-provenance, and domain-mismatched candidates are rejected.
-
-The executable MVP uses only a provider-agnostic local `MockProductProvider`. Every catalog record is explicitly a `mock_fixture`, carries no official URL, and demonstrates the contract without claiming real products, stock, or availability. Product match scores are heuristic ordering signals, not measures of product quality, durability, value, authenticity, or fashion correctness. Budget currencies must match exactly; WardrobeIQ does not perform FX conversion. Preferred brands influence otherwise comparable candidates, avoided brands are excluded, and a differing declared source region is exposed as `region_mismatch`.
-
-## Bag Capacity Engine
-
-`estimate_bag_capacity()` derives an approximate geometric volume from known dimensions, while `analyze_carry_requirements()` checks each known item independently. Capacity estimates are approximate; independent item fit does not prove simultaneous packing; external bag dimensions may overestimate internal usable space.
-
-```python
-from scripts.capacity_estimator import estimate_bag_capacity, analyze_carry_requirements
-
-bag = {"width_cm": 28, "height_cm": 20, "depth_cm": 11}
-result = analyze_carry_requirements(
-    bag,
-    [{"item_type": "phone", "width_cm": 7, "height_cm": 15, "depth_cm": 1},
-     {"item_type": "laptop", "width_cm": 30, "height_cm": 21, "depth_cm": 1.5}],
-)
+```mermaid
+flowchart TD
+    Profile[Structured user profile] --> Resolver[Profile Resolver]
+    Wardrobe[Structured wardrobe] --> WardrobeMatcher[Wardrobe Matcher]
+    Request[Occasion and constraints] --> OutfitMatcher[Outfit Matcher]
+    Resolver --> OutfitMatcher
+    WardrobeMatcher --> OutfitMatcher
+    OutfitMatcher --> Colour[Colour Engine]
+    OutfitMatcher --> Material[Material Engine]
+    OutfitMatcher --> Silhouette[Silhouette Engine]
+    OutfitMatcher --> Accessories[Accessories Matcher]
+    OutfitMatcher --> Plans[Ranked unique outfit plans]
+    Plans --> Renderer[Offline Look Renderer]
+    Wardrobe --> Capacity[Bag Capacity Engine]
+    Plans --> Shopping[Shopping specification and provenance validation]
 ```
 
-## Look Renderer
+`generate_outfits()` 不调用图片、网络或外部 API。所有输出来自本地规则、结构化 JSON 数据和已有公开接口。
 
-`build_render_spec()` and `render_outfit_prompt()` convert an existing structured outfit plan into a fashion-illustration prompt and board-style rendering specification for easier human interpretation. It supports `fashion_sketch` and `fashion_board`, plus optional hairstyle and headwear as rendering cues only; it does not generate images or alter outfit recommendations.
+## Quick Start
 
-## Outfit Matcher
+需要 Python 3.11+；不需要 API key、付费订阅或第三方包。
 
-`generate_outfits()` composes bounded, wardrobe-first plans from normalized inputs and exposes transparent heuristic ranking signals. Outfit ranking is heuristic and explainable; it is not an objective measure of fashion quality.
+```bash
+python -m unittest discover -q
+python examples/run_demo.py
+```
 
-## Core capabilities
+`examples/run_demo.py` 使用 `examples/user_profile.json`、`examples/wardrobe.json` 和 `examples/sample_request.json`，通过 `scripts.outfit_matcher.generate_outfits()` 输出真实的方案数、主单品 ID、评分与警告。
 
-| Capability | Foundation behaviour |
-| --- | --- |
-| Natural-language starting point | Works from a request alone and identifies the context that remains unknown. |
-| Multi-look styling | Defines at least three ranked, complete, occasion-appropriate outfit plans by default. |
-| Style modes | Defines canonical style modes without forcing an irrelevant style or occasion. |
-| Body-aware styling | Uses supplied measurements and fit preferences without inferring missing body data or deriving size from weight. |
-| Size guidance | Compares available body and garment measurements, then states uncertainty when a size chart is absent. |
-| Wardrobe-first matching | Looks for known owned items, then substitutions, before defining a missing item or product-search specification. |
-| Accessory and bag advice | Provides optional accessory slots and checks stated carry needs against stated bag capacity. |
-| Explainability | Produces Chinese rationale, assumptions, trade-offs, and next details that would improve confidence. |
+## Example Output
 
-## Architecture
+样例请求期望 3 套 `client_meeting` 搭配，并要求使用黑色宽松西装外套。样例衣橱实际只有两种唯一主单品组合，因此本地执行返回两套，而不会复制方案：
+
+1. **Rank 1 — score `0.9633`**
+   `outerwear_black_oversized_blazer` + `top_ivory_knit_shell` + `bottom_charcoal_wide_leg_trousers` + `shoes_black_leather_loafers` + `bag_black_structured_shoulder`
+2. **Rank 2 — score `0.9500`**
+   `outerwear_black_oversized_blazer` + `dress_navy_knit_midi` + `shoes_black_leather_loafers` + `bag_black_structured_shoulder`
+
+实际警告：
 
 ```text
-Natural-language request + optional profile / wardrobe / product context
-                              |
-                              v
-                       SKILL.md instructions
-                              |
-                              v
-constraints -> style modes -> wardrobe-first reasoning -> ranked plans
-                              |
-                              v
- Chinese explanation + assumptions + shopping specification
+Only 2 valid unique major-item combinations are available; 3 were requested.
 ```
 
-## OpenAI Image Provider
+分数是可解释的启发式排序信号，不表示客观时尚质量、人体评价或商业推荐。
 
-WardrobeIQ optionally turns a Look Renderer spec into a generated fashion-illustration artifact through a provider-based image layer. `OpenAIImageProvider` reads the user-supplied `OPENAI_API_KEY`; `MockImageProvider` keeps tests offline. Image generation is optional, provider-dependent, and subject to prompt fidelity.
+## Explainability and Constraints
 
-`SKILL.md` is the agent-facing interface. The JSON files in `examples/` provide an intentionally small, portable schema reference. Issue 2 implements the structured Profile Resolver, Issue 3 implements the Fit Engine, and Issue 4 implements the Colour Engine; their modules and unit tests are in `scripts/` and `tests/`. Other directories remain reserved for later implementation stages.
+- `must_use_item_ids` 必须来自衣橱，并放入其真实类别槽位；缺失、与禁用项冲突、同槽位冲突或连衣裙与上衣/下装互斥时会返回 `constraint_conflicts`。
+- `avoid_item_ids` 会从候选组合中硬排除。
+- 主搭配以 `outerwear`、`top`、`bottom`、`dress_or_one_piece`、`shoes`、`bag` 的实际 `item_id` 组合去重；更换风格名称、排序或配饰不构成新搭配。
+- `requested_outfit_count` 是期望数量。有效组合不足时仅返回真实数量，并在 `warnings` 中说明。
+- 每套方案独立执行颜色、材质、廓形和配饰分析，并从实际单品重新计算排序信号。
+- 未知身体测量、服装尺寸、衣橱归属、容量与天气会保留为未知；系统不会补造数据。
+- 决策遵循 Wardrobe First：已有衣物 → 可替代项 → 缺失项 → 购物规格。购物来源数据仅接受可验证的官方来源契约。
 
-## Recommendation pipeline
+## Testing
 
-The intended pipeline is:
-
-1. Normalize a natural-language or structured request into occasion, goal, and known constraints.
-2. Keep **body fit**, **garment fit**, and **style intent** as independent constraints.
-3. Select applicable style modes; prefer supplied profile preferences and otherwise use directions relevant to the request.
-4. Build and rank at least three complete outfit plans for outfit-generation requests.
-5. When wardrobe data exists, check known items and substitutions before identifying a missing item.
-6. Turn a genuine gap into a shopping specification before any future product search.
-7. Return a Chinese explanation with assumptions and confidence limits.
-
-Issue 2 implements the structured Profile Resolver, Issue 3 implements explainable measurement-based Fit Analysis, and Issue 4 implements deterministic colour relationship analysis. Matching, scoring, catalog search, and all other recommendation engines remain planned extensions rather than working features.
-
-## Profile Resolver
-
-`resolve_profile(profile_input: dict) -> dict` converts structured or partially structured profile data into the canonical Issue 1 schema. It normalizes only straightforward aliases, such as `oversize` to `oversized`, `wide leg` to `wide_leg`, `Relaxed Business` to `relaxed_business`, `soft tailoring` to `soft_tailoring`, and `grey` to `gray`.
-
-Unsupported style modes and malformed values are reported instead of guessed. Missing optional data stays `null`, `[]`, or `{}` and is listed under `missing_fields`; the resolver does not parse arbitrary natural language or infer body measurements, body shape, or size.
-
-```python
-from scripts.profile_resolver import resolve_profile
-
-result = resolve_profile({
-    "style_modes": ["Relaxed Business"],
-    "fit_preferences": {
-        "blazers": "Oversize"
-    }
-})
+```bash
+python -m unittest discover -q
+python -m compileall -q scripts
+git diff --check
 ```
 
-## Fit Engine
+当前已验证的离线测试套件包含 **135 tests**。
 
-`analyze_fit(body, garment, category)` compares only known body and garment measurements using category-specific heuristic ease rules from `data/fit_rules.json`. It reports each measurement, calculated ease, a qualitative fit classification, confidence, missing fields, and any invalid values. Shoulder construction is reported independently for shirts, blazers, and coats.
+## Current Limitations
 
-```python
-from scripts.fit_engine import analyze_fit
+- 使用规则型启发式，而非训练式 AI 预测。
+- 结果受限于结构化衣橱的覆盖范围和元数据完整性。
+- 不执行实时商品搜索或库存查询；购物组件只提供规格和官方来源验证契约。
+- **不提供实际 AI 图片生成。**
+- 服装尺寸分析不保证实际合身。
+- 多件物品的包袋分析仅表示独立放入，不保证可同时收纳。
+- 没有 Web 界面、数据库或账户系统。
 
-result = analyze_fit(
-    body={"bust_cm": 82, "shoulder_width_cm": 37},
-    garment={"bust_cm": 100, "shoulder_width_cm": 41},
-    category="blazer",
-)
-```
+## Future Roadmap
 
-Fit analysis **is not size recommendation**. It does not infer missing measurements, leg silhouettes, body shape, or user preferences.
+以下均为 **Planned / Not Implemented**：
 
-## Colour Engine
+- **Fashion Illustration Generation — Planned**：未来可将搭配建议自动转换为含正背面和服装细节的 fashion illustration board。
+- **Broader outfit composition templates — Planned**。
+- **Expanded wardrobe and style coverage — Planned**。
+- **Optional official-brand shopping integration — Planned**。
+- **Additional user-facing interaction methods — Planned**。
 
-`normalize_color`, `analyze_color_pair`, and `analyze_palette` normalize known colour labels and describe their data-driven attributes, contrast, and explicit relationships. Colour metadata, aliases, neutral membership, and harmony pairs are maintained in `data/color_rules.json`.
+## Portfolio Value
 
-```python
-from scripts.color_engine import analyze_palette
+该项目展示了：
 
-result = analyze_palette([
-    "black",
-    "charcoal",
-    "silver",
-])
-```
+- Python 与标准库 JSON 数据处理
+- 规则型决策系统与约束处理
+- 模块化架构与公共接口设计
+- 可解释排序与数据验证
+- 可复现的离线示例
+- 自动化单元测试
 
-Colour relationship analysis **is not styling recommendation**. It does not analyze images, skin tone, undertone, seasonal palettes, or personal characteristics.
-
-## Material Engine
-
-`normalize_material`, `analyze_material_pair`, and `analyze_material_mix` normalize known material labels and describe data-driven material attributes and relationships.
-
-```python
-from scripts.material_engine import analyze_material_pair
-
-result = analyze_material_pair(
-    "wool",
-    "silk",
-)
-```
-
-Material relationship analysis **is not styling recommendation**. Material metadata **is not a quality rating**; it does not score quality, sustainability, or comfort.
-
-## Silhouette Engine
-
-```python
-from scripts.silhouette_engine import analyze_silhouette_mix
-
-result = analyze_silhouette_mix([
-    "oversized",
-    "fitted",
-    "straight",
-])
-```
-
-Silhouette relationship analysis **is not outfit recommendation**. Silhouette analysis **is not body-shape analysis**.
-
-## Accessories Matcher
-
-```python
-from scripts.accessory_matcher import recommend_accessories
-
-result = recommend_accessories(
-    outfit_context={"colors": ["black", "charcoal"], "neckline": "turtleneck", "complexity": "low", "formality": "high"},
-    accessory_preferences={"preferred_metals": ["silver"], "preferred_shapes": ["geometric"], "preferred_scale": ["small", "medium"]},
-    style_mode="minimal",
-)
-```
-
-Accessory matching **is not full outfit recommendation**. Accessory specification **is not product recommendation**.
-
-## Example
-
-The example request asks for three polished, approachable weekday client-meeting outfits built around the known oversized black blazer:
-
-```json
-{
-  "occasion": "client_meeting",
-  "goal": "polished_and_approachable_without_being_overly_formal",
-  "must_use_item_ids": ["outerwear_black_oversized_blazer"],
-  "avoid_item_ids": [],
-  "requested_outfit_count": 3,
-  "preferred_output_language": "zh-CN"
-}
-```
-
-An agent following `SKILL.md` should first inspect supplied wardrobe data, compose and rank three complete looks from known items, explain fit and styling trade-offs in Chinese, and only then describe a missing item if necessary. Full sample inputs are in `examples/user_profile.json`, `examples/wardrobe.json`, and `examples/sample_request.json`.
-
-## Scoring logic
-
-The future ranking model is intentionally explainable rather than black-box. A candidate look or product is expected to be evaluated against these transparent factors:
-
-| Factor | Intended question |
-| --- | --- |
-| Occasion alignment | Does it meet the dress code, activity, and practical constraints? |
-| Body and garment fit | Do known measurements, intended ease, and garment shape work together? |
-| Style alignment | Does it support the requested style mode, silhouette, aesthetic, and colour preferences? |
-| Wardrobe compatibility | Can it combine with known owned pieces and increase outfit reuse? |
-| Practicality | Is it suitable for weather, movement, comfort, care, and carry needs? |
-| Budget alignment | Does the proposed item stay within the stated budget? |
-
-No numerical weights or executable scorer are included yet. Until they exist, agents should explain qualitative trade-offs rather than fabricate a score.
-
-## Project structure
-
-```text
-.
-├── SKILL.md                   # Agent-callable instruction and output contract
-├── README.md                  # Portfolio overview and scope
-├── requirements.txt           # Python 3.11+ standard-library-only note
-├── examples/
-│   ├── user_profile.json      # Optional sizing and preference schema example
-│   ├── wardrobe.json          # Known-item and unknown-capacity schema example
-│   └── sample_request.json    # Wardrobe-first multi-look request
-├── data/                      # Reserved for future local datasets
-│   ├── accessory_rules.json    # Accessory intensity and neckline heuristics
-│   ├── color_rules.json        # Canonical colours and relationship heuristics
-│   ├── fit_rules.json          # Category-specific ease heuristics
-│   ├── material_rules.json     # Canonical materials and relationship heuristics
-│   └── silhouette_rules.json   # Canonical silhouettes and relationship heuristics
-├── scripts/
-│   ├── accessory_matcher.py    # Outfit context -> accessory specifications
-│   ├── color_engine.py         # Known colour labels -> relationship analysis
-│   ├── fit_engine.py           # Known measurements -> explainable fit analysis
-│   ├── material_engine.py      # Known materials -> relationship analysis
-│   ├── profile_resolver.py     # Structured input -> canonical profile resolver
-│   └── silhouette_engine.py    # Known silhouettes -> relationship analysis
-└── tests/
-    ├── test_accessory_matcher.py # Accessories Matcher unit tests
-    ├── test_color_engine.py    # Colour Engine unit tests
-    ├── test_fit_engine.py      # Fit Engine unit tests
-    ├── test_material_engine.py # Material Engine unit tests
-    ├── test_profile_resolver.py # Resolver unit tests
-    └── test_silhouette_engine.py # Silhouette Engine unit tests
-    └── test_profile_resolver.py # Resolver unit tests
-```
-
-## Limitations
-
-- No trained fashion AI model, product catalog, live search, image analysis, or recommendation service is included.
-- The skill cannot validate size without reliable brand- and garment-specific measurements.
-- Sample measurements and preferences are illustrative, not medical, body-shape, or personal-style diagnoses.
-- Weight is intentionally absent from the sample profile and must not be used to derive body shape or size.
-- Recommendations do not invent missing profile, wardrobe, garment, capacity, weather, or budget data.
-- Outcomes depend on complete, current inputs and the user's stated preferences.
-
-## Future extensions
-
-- Rule engines for matching and the remaining documented pipeline.
-- Structured validation and fixture-based tests for wardrobes and requests.
-- Brand-size-chart parsing and explainable ease calculations.
-- Product-search adapters that consume the shopping specification rather than bypass wardrobe-first reasoning.
-- Optional weather, calendar, packing-list, and sustainability constraints.
-- A persisted wardrobe inventory and confidence-aware feedback loop, if a later product scope needs them.
+当前阶段暂不接入 API 图片生成；本地搭配方案生成无需 API key。

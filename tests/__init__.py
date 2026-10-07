@@ -1,1 +1,1 @@
-"""WardrobeIQ test package."""
+"""ClothingMatching-CN Skill test package."""

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "description": "Heuristic ease thresholds for WardrobeIQ MVP fit analysis. These rules are not universal tailoring standards.",
+    "description": "Heuristic ease thresholds for ClothingMatching-CN Skill fit analysis. These rules are not universal tailoring standards.",
     "intervals": "Each range is inclusive at its lower bound and exclusive at its upper bound. A null upper bound has no limit.",
     "shoulder_difference_labels_cm": {
       "narrower_max": -1,

@@ -1,4 +1,4 @@
-# Look Renderer demo
+# ClothingMatching-CN Skill Look Renderer demo
 
 **Input summary:** a `relaxed_business` client-meeting plan with a black blazer, ivory top, black loafers, black bag, and silver earrings.
 
@@ -8,4 +8,4 @@
 
 **Generated prompt:** “Create an elegant fashion illustration fashion_board on a warm_ivory background. Show front view and back view …”
 
-Hairstyle and headwear are visual cues only; this demo makes no grooming or product recommendation and does not generate an image.
+Hairstyle and headwear are visual cues only; this offline demo makes no grooming or product recommendation and does not generate an image. Actual fashion illustration generation is planned, not implemented.

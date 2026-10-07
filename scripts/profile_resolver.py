@@ -1,4 +1,4 @@
-"""Normalize structured user-profile data into WardrobeIQ's canonical schema.
+"""Normalize structured user-profile data into ClothingMatching-CN Skill's canonical schema.
 
 The resolver intentionally accepts structured input only. Natural-language
 extraction, fit decisions, and recommendation logic belong to later layers.
@@ -70,7 +70,7 @@ CANONICAL_TOP_LEVEL_FIELDS = frozenset(
 
 
 def resolve_profile(profile_input: dict[str, Any]) -> dict[str, Any]:
-    """Resolve structured profile input into the canonical WardrobeIQ schema.
+    """Resolve structured profile input into the canonical ClothingMatching-CN Skill schema.
 
     Missing optional fields stay as ``None``, empty lists, or empty mappings.
     Invalid values are replaced with the corresponding unknown value and are

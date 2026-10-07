@@ -1,4 +1,4 @@
-"""Tests for the structured WardrobeIQ profile resolver."""
+"""Tests for the structured ClothingMatching-CN Skill profile resolver."""
 
 from __future__ import annotations
 

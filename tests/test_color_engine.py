@@ -1,4 +1,4 @@
-"""Tests for WardrobeIQ's data-driven colour analysis."""
+"""Tests for ClothingMatching-CN Skill's data-driven colour analysis."""
 
 from __future__ import annotations
 

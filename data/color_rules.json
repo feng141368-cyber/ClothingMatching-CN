@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "description": "WardrobeIQ MVP colour attributes and relationships are descriptive heuristics, not scientific colourimetry or styling recommendations.",
+    "description": "ClothingMatching-CN Skill colour attributes and relationships are descriptive heuristics, not scientific colourimetry or styling recommendations.",
     "neutral_convention": "black, white, ivory, cream, beige, camel, brown, gray, charcoal, navy, silver, and gold are treated as neutral-capable palette colours. Navy and brown are project conventions.",
     "contrast": "Brightness differences of zero, one, and two are classified as low, medium, and high contrast respectively."
   },

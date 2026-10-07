@@ -1,4 +1,4 @@
-"""Tests for category-specific WardrobeIQ fit analysis."""
+"""Tests for category-specific ClothingMatching-CN Skill fit analysis."""
 
 from __future__ import annotations
 
